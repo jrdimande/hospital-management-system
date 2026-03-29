@@ -1,6 +1,6 @@
 package models.entities;
 
-public class Doctor {
+public class Doctor implements Identifiable, Nameable{
     private int id;
     private String name;
     private String speciality;
@@ -14,7 +14,7 @@ public class Doctor {
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
-
+    @Override
     public int getId() {
         return id;
     }
@@ -22,7 +22,7 @@ public class Doctor {
     public void setId(int id) {
         this.id = id;
     }
-
+    @Override
     public String getName() {
         return name;
     }

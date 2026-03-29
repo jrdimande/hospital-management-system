@@ -1,6 +1,6 @@
 package models.entities;
 
-public class Nurse {
+public class Nurse implements Identifiable, Nameable{
     private int id;
     private String name;
     private String shift;
@@ -10,7 +10,7 @@ public class Nurse {
         this.name = name;
         this.shift = shift;
     }
-
+    @Override
     public int getId() {
         return id;
     }
@@ -18,7 +18,7 @@ public class Nurse {
     public void setId(int id) {
         this.id = id;
     }
-
+    @Override
     public String getName() {
         return name;
     }

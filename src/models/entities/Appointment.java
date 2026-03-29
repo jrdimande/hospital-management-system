@@ -2,7 +2,7 @@ package models.entities;
 
 import java.time.LocalDate;
 
-public class Appointment {
+public class Appointment implements Identifiable {
     private int id;
     private Patient patient;
     private Doctor doctor;
@@ -20,6 +20,7 @@ public class Appointment {
 
     }
 
+    @Override
     public int getId() {
         return id;
     }

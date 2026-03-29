@@ -1,6 +1,6 @@
 package models.entities;
 
-public class Patient {
+public class Patient implements Identifiable, Nameable{
     private int id;
     private String name;
     private int age;
