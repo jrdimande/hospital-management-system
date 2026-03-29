@@ -21,6 +21,8 @@ public class Queue {
             this.tail.setNext(newNode);
             this.tail = newNode;
         }
+        this.size++;
+
     }
 
     public Patient dequeue(){
@@ -33,7 +35,12 @@ public class Queue {
         if (this.head == null){
             this.tail = null;
         }
+        this.size--;
         return patient;
+    }
+
+    public int size(){
+        return size;
     }
 
     public Patient peek(){
