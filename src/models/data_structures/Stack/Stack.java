@@ -35,4 +35,8 @@ public class Stack {
         }
         return this.top.getAppointment();
     }
+
+    public int size(){
+        return this.size;
+    }
 }
