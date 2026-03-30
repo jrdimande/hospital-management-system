@@ -17,17 +17,22 @@ public class Stack {
             this.top = newNode;
             return;
         }
-        this.top.setNext(newNode);
+        newNode.setNext(this.top);
         this.top = newNode;
 
     }
 
-    public Appointment pop(){
+    public void pop(){
+        if (this.top == null){
+            return;
+        }
+        this.top = top.getNext();
+    }
+
+    public Appointment peek(){
         if (this.top == null){
             return null;
         }
-        Appointment appointment = this.top.getAppointment();
-        this.top = top.getNext();
-        return appointment;
+        return this.top.getAppointment();
     }
 }
