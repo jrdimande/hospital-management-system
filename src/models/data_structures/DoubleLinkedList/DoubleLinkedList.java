@@ -97,6 +97,5 @@ public class DoubleLinkedList {
             current = current.getNext();
         }
 
-
     }
 }
