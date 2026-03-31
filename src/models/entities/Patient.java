@@ -4,12 +4,12 @@ public class Patient implements Identifiable, Nameable{
     private int id;
     private String name;
     private int age;
-    private String gender;
+    private Gender gender;
     private String phoneNumber;
     private String address;
-    private String priority;
+    private Priority priority;
 
-    public Patient(String name, int age, String gender, String phoneNumber, String address, String priority){
+    public Patient(String name, int age, Gender gender, String phoneNumber, String address, Priority priority){
         this.id = 0;
         this.name = name;
         this.age = age;
@@ -43,11 +43,11 @@ public class Patient implements Identifiable, Nameable{
         this.age = age;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -67,11 +67,11 @@ public class Patient implements Identifiable, Nameable{
         this.address = address;
     }
 
-    public String getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 }
