@@ -1,5 +1,6 @@
 package models.data_structures.DoubleLinkedList;
 
+import models.entities.Identifiable;
 import models.entities.Nameable;
 
 public class DoubleLinkedList {
@@ -33,10 +34,6 @@ public class DoubleLinkedList {
 
     public void removeByName(String name){
         Node current = this.head;
-
-        if (this.head == null && this.tail == null){
-            return;
-        }
         while (current != null){
             Object obj = current.getElement();
             if (obj instanceof Nameable){
@@ -68,5 +65,38 @@ public class DoubleLinkedList {
 
 
     }
-    public void removeByID(){}
+    public void removeByID(int ID){
+        Node current = this.head;
+
+        while (current != null){
+            Object obj = current.getElement();
+
+            if (obj instanceof Identifiable){
+                Identifiable identifiable = (Identifiable) obj;
+
+                if (identifiable.getId() == ID){
+                    Node prev = current.getPrev();
+                    Node next = current.getNext();
+
+                    if (prev != null){
+                        prev.setNext(next);
+                    }else {
+                        this.head = next;
+                    }
+
+                    if (next != null){
+                        next.setPrev(prev);
+                    }else {
+                        this.tail = prev;
+                    }
+
+                    this.size --;
+                    break;
+                }
+            }
+            current = current.getNext();
+        }
+
+
+    }
 }
