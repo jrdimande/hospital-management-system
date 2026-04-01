@@ -5,11 +5,11 @@ import models.entities.Priority;
 import services.PatientRegisterRequest;
 import services.PatientService;
 
-public class PatientController {
+public class ReceptionistController {
 	
-	private PatientService patientService;;
+	private PatientService patientService;
 	
-	public PatientController() {
+	public ReceptionistController() {
 		this.patientService = new PatientService();
 	}
 	

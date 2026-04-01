@@ -1,6 +1,6 @@
 package test;
 
-import controllers.PatientController;
+import controllers.ReceptionistController;
 import models.entities.Gender;
 import models.entities.Patient;
 import models.entities.Priority;
@@ -8,7 +8,7 @@ import services.PatientRegisterRequest;
 
 public class TestMain {
 	
-	static PatientController patientController = new PatientController();
+	static ReceptionistController patientController = new ReceptionistController();
 	
 	public static void main(String[] args) {
 		var patient = testRegister();
