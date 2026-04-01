@@ -1,7 +1,6 @@
 package services;
 
 import models.entities.Gender;
-import models.entities.Priority;
 
 public class PatientRegisterRequest {
 	
@@ -10,14 +9,11 @@ public class PatientRegisterRequest {
 	private Gender gender;
 	private String phoneNumber;
 	private String address;
-	private Priority priority;
 	
 	public PatientRegisterRequest() {}
 	
 	public PatientRegisterRequest(String name, Integer age,
-			Gender gender, String phoneNumber, String address,
-			Priority priority) {
-		this.priority = priority;
+			Gender gender, String phoneNumber, String address) {
 		this.gender = gender;
 		this.phoneNumber = phoneNumber;
 		this.name = name;
@@ -54,12 +50,6 @@ public class PatientRegisterRequest {
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}
-	public Priority getPriority() {
-		return priority;
-	}
-	public void setPriority(Priority priority) {
-		this.priority = priority;
 	}
 	
 	

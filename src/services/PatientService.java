@@ -1,14 +1,20 @@
 package services;
 
+import java.util.List;
+
 import models.data_structures.DoubleLinkedList.DoubleLinkedList;
+import models.data_structures.Queue.Queue;
 import models.entities.Patient;
+import models.entities.Priority;
 
 public class PatientService {
 	
 	private DoubleLinkedList patients;
+	private Queue queue; 
 	
 	public PatientService() {
 		this.patients = new DoubleLinkedList();
+		this.queue = new Queue();
 	}
 	
 	public Patient register(PatientRegisterRequest data) {
@@ -17,11 +23,31 @@ public class PatientService {
 				data.getAge(),
 				data.getGender(),
 				data.getPhoneNumber(),
-				data.getAddress(),
-				data.getPriority());
+				data.getAddress());
 		
 		patients.add(patient);
 		return patient;
+	}
+	
+	public Patient addToQueue(Patient patient, Priority priority) {
+		if(priority == null) {
+			throw new RuntimeException("Please set a priority");
+		}
+		
+		if(patient == null) {
+			throw new RuntimeException("Please select a patient");
+		}
+		
+		patient.setPriority(priority);
+		this.queue.enqueue(patient);
+		
+		return patient;
+	}
+	
+	
+	//list method not implemented yet
+	public List<Patient> listPatients(){
+		return null;
 	}
 
 	
@@ -44,10 +70,6 @@ public class PatientService {
 		
 		if(data.getPhoneNumber() == null) {
 			throw new RuntimeException("The phone number cannot be null");
-		}
-		
-		if(data.getPriority() == null) {
-			throw new RuntimeException("The priority cannot be null");
 		}
 	}
 }
