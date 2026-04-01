@@ -1,0 +1,67 @@
+package services;
+
+import models.entities.Gender;
+import models.entities.Priority;
+
+public class PatientRegisterRequest {
+	
+	private String name;
+	private Integer age;
+	private Gender gender;
+	private String phoneNumber;
+	private String address;
+	private Priority priority;
+	
+	public PatientRegisterRequest() {}
+	
+	public PatientRegisterRequest(String name, Integer age,
+			Gender gender, String phoneNumber, String address,
+			Priority priority) {
+		this.priority = priority;
+		this.gender = gender;
+		this.phoneNumber = phoneNumber;
+		this.name = name;
+		this.age = age;
+		this.address = address;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public Gender getGender() {
+		return gender;
+	}
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumner) {
+		this.phoneNumber = phoneNumner;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Priority getPriority() {
+		return priority;
+	}
+	public void setPriority(Priority priority) {
+		this.priority = priority;
+	}
+	
+	
+
+}
