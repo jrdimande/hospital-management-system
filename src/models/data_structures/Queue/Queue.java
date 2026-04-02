@@ -44,6 +44,21 @@ public class Queue {
     }
 
     public Patient peek(){
+        if (this.head == null){
+            return null;
+        }
         return this.head.getPatient();
+    }
+
+    public boolean contain(int ID){
+        Node current = this.head;
+
+        while (current != null){
+            if (current.getPatient().getId() == ID){
+                return true;
+            }
+            current = current.getNext();
+        }
+        return false;
     }
 }

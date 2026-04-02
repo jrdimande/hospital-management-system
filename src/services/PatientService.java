@@ -25,7 +25,7 @@ public class PatientService {
 	
 	public Patient register(PatientRegisterRequest data) throws Exception{
 		this.verifyUserData(data);
-		var patient = new Patient(data.getName(),
+		Patient patient = new Patient(data.getName(),
 				data.getAge(),
 				data.getGender(),
 				data.getPhoneNumber(),
@@ -54,6 +54,10 @@ public class PatientService {
 	//list method not implemented yet
 	public List<Patient> listPatients(){
 		return null;
+	}
+
+	public Queue getQueue(){
+		return this.queue;
 	}
 	
 	
