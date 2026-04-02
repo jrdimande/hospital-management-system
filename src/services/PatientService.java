@@ -1,0 +1,91 @@
+package services;
+
+import java.util.List;
+
+import javax.naming.InvalidNameException;
+
+import infra.exceptions.EmptyAddressException;
+import infra.exceptions.EmptyGenderException;
+import infra.exceptions.InvalidAgeException;
+import infra.exceptions.InvalidPhoneNumber;
+import models.data_structures.DoubleLinkedList.DoubleLinkedList;
+import models.data_structures.Queue.Queue;
+import models.entities.Patient;
+import models.entities.Priority;
+
+public class PatientService {
+	
+	private DoubleLinkedList patients;
+	private Queue queue; 
+	
+	public PatientService() {
+		this.patients = new DoubleLinkedList();
+		this.queue = new Queue();
+	}
+	
+	public Patient register(PatientRegisterRequest data) throws Exception{
+		this.verifyUserData(data);
+		var patient = new Patient(data.getName(),
+				data.getAge(),
+				data.getGender(),
+				data.getPhoneNumber(),
+				data.getAddress());
+		
+		patients.add(patient);
+		return patient;
+	}
+	
+	public Patient addToQueue(Patient patient, Priority priority) {
+		if(priority == null) {
+			throw new RuntimeException("Please set a priority");
+		}
+		
+		if(patient == null) {
+			throw new RuntimeException("Please select a patient");
+		}
+		
+		patient.setPriority(priority);
+		this.queue.enqueue(patient);
+		
+		return patient;
+	}
+	
+	
+	//list method not implemented yet
+	public List<Patient> listPatients(){
+		return null;
+	}
+	
+	
+
+	
+	private void verifyUserData(PatientRegisterRequest data) throws Exception{
+		if(data.getAge() == null) {
+			throw new InvalidAgeException("Age cannot be empty");
+		}
+		
+		if(data.getAge() < 0 || data.getAge() > 100) {
+			throw new InvalidAgeException("Invalid age!");
+		}
+		
+		if(data.getName() == null) {
+			throw new InvalidNameException();
+		}
+		
+		if(data.getGender() == null) {
+			throw new EmptyGenderException();
+		}
+		
+		if(data.getAddress() == null) {
+			throw new EmptyAddressException();
+		}
+		
+		if(data.getPhoneNumber() == null) {
+			throw new InvalidPhoneNumber("Phone number cannot be null");
+		}
+		
+		if(!data.getPhoneNumber().matches("^(258)(82|83|84|85|86|87)[0-9]{7}$")) {
+			throw new InvalidPhoneNumber("Invalid phone number");
+		}
+	}
+}

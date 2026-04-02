@@ -9,14 +9,14 @@ public class Patient implements Identifiable, Nameable{
     private String address;
     private Priority priority;
 
-    public Patient(String name, int age, Gender gender, String phoneNumber, String address, Priority priority){
+    public Patient(String name, int age, Gender gender, String phoneNumber, String address){
         this.id = 0;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.priority = priority;
+        this.priority = null;
     }
 
     public int getId() {
