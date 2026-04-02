@@ -98,4 +98,38 @@ public class DoubleLinkedList {
         }
 
     }
+
+    public boolean contain(int ID){
+        Node current = this.head;
+        Object obj = current.getElement();
+
+        while (current != null){
+            if (obj instanceof Identifiable){
+                Identifiable item = (Identifiable) obj;
+
+                if (item.getId() == ID){
+                    return true;
+                }
+            }
+            current = current.getNext();
+        }
+        return false;
+    }
+
+    public boolean contain(String name){
+        Node current = this.head;
+        Object obj = current.getElement();
+
+        while (current != null){
+            if (obj instanceof Nameable){
+                Nameable item = (Nameable) obj;
+
+                if (item.getName().equals(name)){
+                    return true;
+                }
+            }
+            current = current.getNext();
+        }
+        return false;
+    }
 }
