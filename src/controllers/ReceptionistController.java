@@ -13,10 +13,10 @@ public class ReceptionistController {
 		this.patientService = new PatientService();
 	}
 	
-	public Patient registerPatient(PatientRegisterRequest data) {
+	public Patient registerPatient(PatientRegisterRequest data) throws Exception{
 		try {
 			return this.patientService.register(data);
-		}catch(RuntimeException e) {
+		}catch(Exception e) {
 			throw e;
 		}
 	}
