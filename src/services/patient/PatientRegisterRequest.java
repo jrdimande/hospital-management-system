@@ -1,4 +1,4 @@
-package services;
+package services.patient;
 
 import models.entities.Gender;
 

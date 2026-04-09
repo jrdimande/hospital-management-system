@@ -1,11 +1,16 @@
 package controllers;
 
+import models.data_structures.Queue.Queue;
 import models.entities.Patient;
 import models.entities.Priority;
-import services.PatientRegisterRequest;
-import services.PatientService;
+import services.patient.PatientRegisterRequest;
+import services.patient.PatientService;
 
 public class ReceptionistController {
+	
+	/**
+	 * @params patientService - business logic for patient
+	 */
 	
 	private PatientService patientService;
 	
@@ -21,13 +26,17 @@ public class ReceptionistController {
 		}
 	}
 	
-	public void addPacientToQueue(Patient patient, Priority priority) {
+	public void addPacientToQueue(Patient patient, Priority priority) throws Exception{
 		try {
 			this.patientService.addToQueue(patient, priority);
 			System.out.println("Paciente " + patient.getName() + " adicionado a fila");
 		}catch(RuntimeException e) {
 			e.getStackTrace();
 		}
+	}
+	
+	public Queue getPatientQueue() {
+		return this.patientService.listPatientsQueue();
 	}
 
 }

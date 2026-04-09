@@ -4,7 +4,7 @@ import controllers.ReceptionistController;
 import models.entities.Gender;
 import models.entities.Patient;
 import models.entities.Priority;
-import services.PatientRegisterRequest;
+import services.patient.PatientRegisterRequest;
 
 public class TestMain {
 	
@@ -24,7 +24,7 @@ public class TestMain {
 		return phoneNumber.matches("^+(258)(82|83|84|85|86|87)[0-9]{7}$");
 	}
 	
-	private static void testAddToQueue(Patient patient, Priority priority) {
+	private static void testAddToQueue(Patient patient, Priority priority) throws Exception{
 		patientController.addPacientToQueue(patient, priority);
 	}
 	
