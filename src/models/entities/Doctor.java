@@ -14,6 +14,7 @@ public class Doctor implements Identifiable, Nameable{
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
+    
     @Override
     public int getId() {
         return id;

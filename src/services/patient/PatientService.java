@@ -1,6 +1,4 @@
-package services;
-
-import java.util.List;
+package services.patient;
 
 import javax.naming.InvalidNameException;
 
@@ -8,6 +6,7 @@ import infra.exceptions.EmptyAddressException;
 import infra.exceptions.EmptyGenderException;
 import infra.exceptions.InvalidAgeException;
 import infra.exceptions.InvalidPhoneNumber;
+import infra.exceptions.PatientErrorException;
 import models.data_structures.DoubleLinkedList.DoubleLinkedList;
 import models.data_structures.Queue.Queue;
 import models.entities.Patient;
@@ -31,17 +30,25 @@ public class PatientService {
 				data.getPhoneNumber(),
 				data.getAddress());
 		
+		if(this.patients.contain(patient.getId())) {			
+			throw new PatientErrorException("User already exists");
+		}
+		
 		patients.add(patient);
 		return patient;
 	}
 	
-	public Patient addToQueue(Patient patient, Priority priority) {
+	public Patient addToQueue(Patient patient, Priority priority) throws Exception{
+		if(patient == null) {
+			throw new RuntimeException("Please select a patient");
+		}
+		
 		if(priority == null) {
 			throw new RuntimeException("Please set a priority");
 		}
 		
-		if(patient == null) {
-			throw new RuntimeException("Please select a patient");
+		if(!patients.contain(patient.getId())) {
+			throw new PatientErrorException("Patient not registred");
 		}
 		
 		patient.setPriority(priority);
@@ -50,18 +57,9 @@ public class PatientService {
 		return patient;
 	}
 	
-	
-	//list method not implemented yet
-	public List<Patient> listPatients(){
-		return null;
-	}
-
-	public Queue getQueue(){
+	public Queue listPatientsQueue(){
 		return this.queue;
 	}
-	
-	
-
 	
 	private void verifyUserData(PatientRegisterRequest data) throws Exception{
 		if(data.getAge() == null) {
