@@ -1,5 +1,4 @@
 package models.data_structures.Queue;
-
 import models.entities.Patient;
 
 public class Queue {
@@ -25,6 +24,18 @@ public class Queue {
 
     }
 
+    public Patient getPatient(int id){
+        Node current = this.head;
+
+        while (current != null){
+            if (current.getPatient().getId() == id){
+                return current.getPatient();
+            }
+            current = current.getNext();
+        }
+        return null;
+    }
+
     public Patient dequeue(){
         if (this.head == null){
             return null;
@@ -38,6 +49,7 @@ public class Queue {
         this.size--;
         return patient;
     }
+
 
     public int size(){
         return size;

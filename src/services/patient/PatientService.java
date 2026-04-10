@@ -56,6 +56,11 @@ public class PatientService {
 		
 		return patient;
 	}
+
+	public void cancel(){
+		this.queue.dequeue();
+	}
+
 	
 	public Queue listPatientsQueue(){
 		return this.queue;
