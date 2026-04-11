@@ -4,6 +4,11 @@ out/
 !**/src/test/**/out/
 .kotlin
 .idea/
+.env
+lib
+mysql-connector-j-8.4.0
+hospital-management-system.iml
+mysql-connector-j-8.4.0.tar.gz
 
 
 ### Eclipse ###

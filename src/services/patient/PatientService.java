@@ -11,11 +11,13 @@ import models.data_structures.DoubleLinkedList.DoubleLinkedList;
 import models.data_structures.Queue.Queue;
 import models.entities.Patient;
 import models.entities.Priority;
+import repositories.PatientRepository;
 
 public class PatientService {
 	
 	private DoubleLinkedList patients;
-	private Queue queue; 
+	private Queue queue;
+	private PatientRepository patientRepository = new PatientRepository();
 	
 	public PatientService() {
 		this.patients = new DoubleLinkedList();
@@ -24,6 +26,7 @@ public class PatientService {
 	
 	public Patient register(PatientRegisterRequest data) throws Exception{
 		this.verifyUserData(data);
+		patientRepository.save(data);
 		Patient patient = new Patient(data.getName(),
 				data.getAge(),
 				data.getGender(),
