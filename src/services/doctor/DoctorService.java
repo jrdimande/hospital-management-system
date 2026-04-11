@@ -19,7 +19,8 @@ public class DoctorService {
 		Doctor doctor = new Doctor(data.getName(),
 				data.getSpeciality(),
 				data.getPhoneNumber(),
-				null);
+				data.getPassword());
+
 		
 		if(this.doctors.contain(doctor.getId())) {
 			throw new DoctorErrorException("");
