@@ -7,12 +7,15 @@ import models.data_structures.Stack.Stack;
 import models.entities.Appointment;
 import models.entities.Doctor;
 import models.entities.History;
+import models.entities.Patient;
+import repositories.DoctorRepository;
 
 public class DoctorService {
 	
 	private DoubleLinkedList doctors;
 	private Queue patientsQueue;
 	private Stack appointments;
+	private DoctorRepository doctorRepository = new DoctorRepository();
 	
 	
 	public Doctor registerDoctor(DoctorResgisterRequest data) throws Exception{
@@ -25,15 +28,18 @@ public class DoctorService {
 		if(this.doctors.contain(doctor.getId())) {
 			throw new DoctorErrorException("");
 		}
-		
+
+		doctorRepository.save(data);
 		this.doctors.add(doctor);
 		return doctor;
 	}
 	
 	public Appointment checkPatitient(Doctor doctor, String notes) throws Exception{
-		var patient = this.patientsQueue.peek();
+		Patient patient = this.patientsQueue.peek();
 		
-		var appointment = new Appointment(patient, doctor, notes);
+		Appointment appointment = new Appointment(patient, doctor, notes);
+
+
 		
 		this.appointments.push(appointment);
 		this.patientsQueue.dequeue();
