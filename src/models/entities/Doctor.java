@@ -7,6 +7,8 @@ public class Doctor implements Identifiable, Nameable{
     private String phoneNumber;
     private String password;
 
+    public Doctor(){}
+
     public Doctor(String name, String speciality, String phoneNumber, String password){
         this.id = 0;
         this.name = name;

@@ -14,6 +14,7 @@ public class DoubleLinkedList {
         this.size = 0;
     }
 
+
     public void add(Object element){
         Node newNode = new Node(element);
 
@@ -99,11 +100,13 @@ public class DoubleLinkedList {
 
     }
 
+
     public boolean contain(int ID){
         Node current = this.head;
-        Object obj = current.getElement();
+
 
         while (current != null){
+            Object obj = current.getElement();
             if (obj instanceof Identifiable){
                 Identifiable item = (Identifiable) obj;
 
@@ -118,9 +121,9 @@ public class DoubleLinkedList {
 
     public boolean contain(String name){
         Node current = this.head;
-        Object obj = current.getElement();
 
         while (current != null){
+            Object obj = current.getElement();
             if (obj instanceof Nameable){
                 Nameable item = (Nameable) obj;
 
@@ -132,4 +135,6 @@ public class DoubleLinkedList {
         }
         return false;
     }
+
+
 }

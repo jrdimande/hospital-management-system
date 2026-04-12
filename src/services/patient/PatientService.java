@@ -20,24 +20,25 @@ public class PatientService {
 	private PatientRepository patientRepository = new PatientRepository();
 	
 	public PatientService() {
-		this.patients = new DoubleLinkedList();
+		this.patients = patientRepository.findAll();
 		this.queue = new Queue();
 	}
 	
 	public Patient register(PatientRegisterRequest data) throws Exception{
 		this.verifyUserData(data);
-		patientRepository.save(data);
+		int id = patientRepository.save(data);
+
 		Patient patient = new Patient(data.getName(),
 				data.getAge(),
 				data.getGender(),
 				data.getPhoneNumber(),
 				data.getAddress());
+		patient.setId(id);
 		
 		if(this.patients.contain(patient.getId())) {			
 			throw new PatientErrorException("User already exists");
 		}
-		
-		patients.add(patient);
+
 		return patient;
 	}
 	
@@ -60,13 +61,13 @@ public class PatientService {
 		return patient;
 	}
 
-	public void cancel(){
-		this.queue.dequeue();
-	}
 
-	
 	public Queue listPatientsQueue(){
 		return this.queue;
+	}
+
+	public DoubleLinkedList getPatients(){
+		return this.patients;
 	}
 	
 	private void verifyUserData(PatientRegisterRequest data) throws Exception{

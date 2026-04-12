@@ -15,8 +15,12 @@ public class DoctorService {
 	private DoubleLinkedList doctors;
 	private Queue patientsQueue;
 	private Stack appointments;
-	private DoctorRepository doctorRepository = new DoctorRepository();
-	
+	private DoctorRepository doctorRepository;
+
+	public DoctorService(){
+		this.doctors = doctorRepository.findAll();
+		this.doctorRepository = new DoctorRepository();
+	}
 	
 	public Doctor registerDoctor(DoctorResgisterRequest data) throws Exception{
 		Doctor doctor = new Doctor(data.getName(),
@@ -29,7 +33,9 @@ public class DoctorService {
 			throw new DoctorErrorException("");
 		}
 
-		doctorRepository.save(data);
+		int id = doctorRepository.save(data);
+		doctor.setId(id);
+
 		this.doctors.add(doctor);
 		return doctor;
 	}
@@ -38,8 +44,6 @@ public class DoctorService {
 		Patient patient = this.patientsQueue.peek();
 		
 		Appointment appointment = new Appointment(patient, doctor, notes);
-
-
 		
 		this.appointments.push(appointment);
 		this.patientsQueue.dequeue();

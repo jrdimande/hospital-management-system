@@ -9,6 +9,7 @@ public class Patient implements Identifiable, Nameable{
     private String address;
     private Priority priority;
 
+    public Patient(){}
     public Patient(String name, int age, Gender gender, String phoneNumber, String address){
         this.id = 0;
         this.name = name;
@@ -74,4 +75,5 @@ public class Patient implements Identifiable, Nameable{
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
+
 }
