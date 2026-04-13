@@ -27,6 +27,14 @@ public class ReceptionistController {
 		}
 	}
 
+	public void removePatient(int id){
+		try {
+			this.patientService.remove(id);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public void addPacientToQueue(Patient patient, Priority priority) throws Exception{
 		try {
 			this.patientService.addToQueue(patient, priority);

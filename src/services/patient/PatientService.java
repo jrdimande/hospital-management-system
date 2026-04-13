@@ -34,12 +34,20 @@ public class PatientService {
 				data.getPhoneNumber(),
 				data.getAddress());
 		patient.setId(id);
+		patients.add(patient);
 		
 		if(this.patients.contain(patient.getId())) {			
 			throw new PatientErrorException("User already exists");
 		}
 
 		return patient;
+	}
+
+	public void remove(int id){
+		if (patients.contain(id)){
+			patientRepository.delete(id);
+			patients.removeByID(id);
+		}
 	}
 	
 	public Patient addToQueue(Patient patient, Priority priority) throws Exception{
@@ -60,7 +68,6 @@ public class PatientService {
 		
 		return patient;
 	}
-
 
 	public Queue listPatientsQueue(){
 		return this.queue;

@@ -77,5 +77,24 @@ public class PatientRepository {
         return patients;
     }
 
+    public void update(Patient patient){
+        String sql = "UPDATE SET patients name = ?, age = ?, gender = ?, phone = ?, address = ? where id = ?";
+
+        try(Connection connection = DBConnection.getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setString(1, patient.getName());
+            ps.setInt(2,patient.getAge());
+            ps.setString(3, patient.getGender().name());
+            ps.setString(4, patient.getPhoneNumber());
+            ps.setString(5, patient.getAddress());
+            ps.setInt(6, patient.getId());
+            ps.executeUpdate();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
