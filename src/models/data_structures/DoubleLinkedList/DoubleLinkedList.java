@@ -1,7 +1,9 @@
 package models.data_structures.DoubleLinkedList;
 
+import models.entities.Doctor;
 import models.entities.Identifiable;
 import models.entities.Nameable;
+import models.entities.Patient;
 
 public class DoubleLinkedList {
     private Node head;
@@ -66,6 +68,7 @@ public class DoubleLinkedList {
 
 
     }
+
     public void removeByID(int ID){
         Node current = this.head;
 
@@ -134,6 +137,35 @@ public class DoubleLinkedList {
             current = current.getNext();
         }
         return false;
+    }
+
+    private Identifiable get(int id){
+        Node current = this.head;
+
+        while (current != null){
+            Object obj = current.getElement();
+
+            if (obj instanceof Identifiable){
+                Identifiable item = (Identifiable) obj;
+
+                if (item.getId() == id){
+                    return item;
+                }
+            }
+
+            current = current.getNext();
+        }
+        return null;
+    }
+
+    public Patient getPatient(int id){
+        Patient patient = (Patient) get(id);
+        return patient;
+    }
+
+    public Doctor getDoctor(int id){
+        Doctor doctor = (Doctor) get(id);
+        return doctor;
     }
 
 
