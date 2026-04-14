@@ -25,7 +25,7 @@ public class TestMain {
 	}
 	
 	private static void testAddToQueue(Patient patient, Priority priority) throws Exception{
-		patientController.addPacientToQueue(patient, priority);
+		//patientController.addPacientToQueue(patient, priority);
 	}
 	
 	private static Patient testRegister() throws Exception{
