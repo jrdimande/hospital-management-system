@@ -35,10 +35,18 @@ public class ReceptionistController {
 		}
 	}
 
-	public void addPacientToQueue(Patient patient, Priority priority) throws Exception{
+	public void updatePatient(Patient patient){
 		try {
-			this.patientService.addToQueue(patient, priority);
-			System.out.println("Paciente " + patient.getName() + " adicionado a fila");
+			this.patientService.updatePatient(patient);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void addPacientToQueue(int id, Priority priority) throws Exception{
+		try {
+			this.patientService.addToQueue(id, priority);
+			//System.out.println("Paciente " + patient.getName() + " adicionado a fila");
 		}catch(RuntimeException e) {
 			e.getStackTrace();
 		}

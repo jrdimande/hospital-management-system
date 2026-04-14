@@ -50,7 +50,8 @@ public class PatientService {
 		}
 	}
 	
-	public Patient addToQueue(Patient patient, Priority priority) throws Exception{
+	public Patient addToQueue(int id, Priority priority) throws Exception{
+		Patient patient = patients.getPatient(id);
 		if(patient == null) {
 			throw new RuntimeException("Please select a patient");
 		}
@@ -75,6 +76,10 @@ public class PatientService {
 
 	public DoubleLinkedList getPatients(){
 		return this.patients;
+	}
+
+	public void updatePatient(Patient patient){
+		patientRepository.update(patient);
 	}
 	
 	private void verifyUserData(PatientRegisterRequest data) throws Exception{
