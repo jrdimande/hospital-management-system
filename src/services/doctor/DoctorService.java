@@ -39,6 +39,10 @@ public class DoctorService {
 		this.doctors.add(doctor);
 		return doctor;
 	}
+
+	public void removeDoctor(int id){
+		doctorRepository.delete(id);
+	}
 	
 	public Appointment checkPatitient(Doctor doctor, String notes) throws Exception{
 		Patient patient = this.patientsQueue.peek();

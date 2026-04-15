@@ -15,6 +15,14 @@ public class DoctorController {
 			throw e;
 		}
 	}
+
+	public void removeDocter(int id){
+		try{
+			doctorService.removeDoctor(id);
+		}catch(Exception e){
+			throw e;
+		}
+	}
 	
 	public void check(Doctor doctor, String note) {
 		try {
