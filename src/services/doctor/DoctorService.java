@@ -52,7 +52,7 @@ public class DoctorService {
 	public Appointment checkPatitient(Doctor doctor, String notes) throws Exception{
 		Patient patient = this.patientsQueue.peek();
 		
-		Appointment appointment = new Appointment(patient, doctor, notes);
+		Appointment appointment = new Appointment(patient.getName(), doctor.getName(), notes);
 		
 		this.appointments.push(appointment);
 		this.patientsQueue.dequeue();
