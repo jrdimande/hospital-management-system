@@ -4,13 +4,15 @@ import java.time.LocalDate;
 
 public class Appointment implements Identifiable {
     private int id;
-    private Patient patient;
-    private Doctor doctor;
+    private String patient;
+    private String doctor;
     private String date;
     private String notes;
     private boolean completed;
 
-    public Appointment(Patient patient, Doctor doctor, String notes) {
+    public Appointment(){}
+
+    public Appointment(String patient, String doctor, String notes) {
         this.id = 0;
         this.patient = patient;
         this.doctor = doctor;
@@ -29,19 +31,19 @@ public class Appointment implements Identifiable {
         this.id = id;
     }
 
-    public Patient getPatient() {
+    public String getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(String patient) {
         this.patient = patient;
     }
 
-    public Doctor getDoctor() {
+    public String getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
+    public void setDoctor(String doctor) {
         this.doctor = doctor;
     }
 
