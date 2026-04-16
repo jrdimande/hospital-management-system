@@ -46,6 +46,7 @@ public class DoctorRepository {
         }
     }
 
+
     public DoubleLinkedList findAll(){
         DoubleLinkedList doctors = new DoubleLinkedList();
         String sql = "SELECT * FROM doctors";
@@ -72,5 +73,21 @@ public class DoctorRepository {
 
         return doctors;
 
+    }
+
+    public void update(Doctor doctor){
+        String sql = "UPDATE SET doctors name = ?, speciality = ?, phone = ?, password = ? where id = ?";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setString(1, doctor.getName());
+            ps.setString(2, doctor.getSpeciality());
+            ps.setString(3, doctor.getPhoneNumber());
+            ps.setString(4, doctor.getPassword());
+            ps.setInt(5, doctor.getId());
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }

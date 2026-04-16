@@ -40,6 +40,11 @@ public class DoctorService {
 		return doctor;
 	}
 
+	public void updateDoctor(Doctor doctor){
+		doctorRepository.update(doctor);
+
+	}
+
 	public void removeDoctor(int id){
 		doctorRepository.delete(id);
 	}

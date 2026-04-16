@@ -23,6 +23,14 @@ public class DoctorController {
 			throw e;
 		}
 	}
+
+	public void updateDoctor(Doctor doctor){
+		try {
+			doctorService.updateDoctor(doctor);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void check(Doctor doctor, String note) {
 		try {
