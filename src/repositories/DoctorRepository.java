@@ -1,14 +1,45 @@
 package repositories;
-import models.data_structures.DoubleLinkedList.DoubleLinkedList;
-import models.entities.Doctor;
-import services.doctor.DoctorResgisterRequest;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import models.data_structures.DoubleLinkedList.DoubleLinkedList;
+import models.entities.Doctor;
+import services.auth.LoginRequestData;
+import services.doctor.DoctorResgisterRequest;
 
 public class DoctorRepository {
+	
+	public Doctor login(LoginRequestData data) {
+	    String sql = "SELECT * FROM doctors WHERE id = ? AND password = ?";
+	        
+	    try (Connection connection = DBConnection.getConnection();
+	         PreparedStatement ps = connection.prepareStatement(sql)) {
+
+	        ps.setInt(1, data.getId());
+	        ps.setString(2, data.getPassword());
+
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            Doctor doctor = new Doctor();
+	            doctor.setId(rs.getInt("id"));
+	            doctor.setName(rs.getString("name"));
+	            doctor.setPhoneNumber(rs.getString("phone"));
+	            doctor.setPassword(rs.getString("password"));
+	            doctor.setSpeciality(rs.getString("speciality"));
+	            
+	            return doctor;
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return null; 
+	}
+	
     public int save(DoctorResgisterRequest doctor){
         String sql = "INSERT INTO doctors(name, speciality, phone, password) VALUES(?, ?, ?, ?)";
         try(Connection connection = DBConnection.getConnection();

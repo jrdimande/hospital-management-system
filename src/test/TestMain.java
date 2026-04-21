@@ -4,6 +4,7 @@ import controllers.ReceptionistController;
 import models.entities.Gender;
 import models.entities.Patient;
 import models.entities.Priority;
+import services.history.HistoryService;
 import services.patient.PatientRegisterRequest;
 
 public class TestMain {
@@ -11,12 +12,10 @@ public class TestMain {
 	static ReceptionistController patientController = new ReceptionistController();
 	
 	public static void main(String[] args) {
-//		System.out.println(test("+258867903680"));
 		try {
-			var patient = testRegister();
-			testAddToQueue(patient, Priority.LOW);
-		}catch(Exception e) {
-			e.getStackTrace();
+			testHistory();
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -38,6 +37,13 @@ public class TestMain {
 				name, age, Gender.MALE, phoneNumber, address);
 		
 		return patientController.registerPatient(requestData);
+	}
+	
+	//history test
+	private static void testHistory() throws Exception{
+		HistoryService historyService = new HistoryService();
+		
+		System.out.println(historyService.listHistory());
 	}
 	
 }

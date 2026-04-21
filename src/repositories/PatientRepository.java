@@ -1,17 +1,18 @@
 package repositories;
 
 
-import models.data_structures.DoubleLinkedList.DoubleLinkedList;
-import models.entities.Gender;
-import models.entities.Patient;
-import services.patient.PatientRegisterRequest;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import models.data_structures.DoubleLinkedList.DoubleLinkedList;
+import models.entities.Gender;
+import models.entities.Patient;
+import services.patient.PatientRegisterRequest;
+
 public class PatientRepository {
+	
     public int save(PatientRegisterRequest patient){
         String sql = "INSERT INTO patients(name, age, gender, phone, address) VALUES(?, ?, ?, ?, ?)";
         try (Connection connection = DBConnection.getConnection();
@@ -46,6 +47,7 @@ public class PatientRepository {
             e.printStackTrace();
         }
     }
+    
 
     public DoubleLinkedList findAll(){
         DoubleLinkedList patients = new DoubleLinkedList();
