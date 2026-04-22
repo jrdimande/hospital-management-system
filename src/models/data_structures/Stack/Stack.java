@@ -1,6 +1,5 @@
 package models.data_structures.Stack;
 
-import models.entities.Appointment;
 
 public class Stack {
     private Node top;
@@ -11,8 +10,8 @@ public class Stack {
         this.size = 0;
     }
 
-    public void push(Appointment appointment){
-        Node newNode = new Node(appointment);
+    public void push(Object element){
+        Node newNode = new Node(element);
         if (top == null){
             this.top = newNode;
             return;
@@ -29,7 +28,7 @@ public class Stack {
         this.top = top.getNext();
     }
 
-    public Appointment peek(){
+    public Object peek(){
         if (this.top == null){
             return null;
         }

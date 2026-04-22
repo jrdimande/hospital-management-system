@@ -1,22 +1,20 @@
 package models.data_structures.Stack;
 
-import models.entities.Appointment;
-
 public class Node {
-    private Appointment appointment;
+    private Object element;
     private Node next;
 
-    public Node(Appointment appointment){
-        this.appointment = appointment;
+    public Node(Object appointment){
+        this.element = appointment;
         this.next = null;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
+    public Object getAppointment() {
+        return element;
     }
 
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
+    public void setAppointment(Object element) {
+        this.element = element;
     }
 
     public Node getNext() {

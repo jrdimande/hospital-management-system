@@ -9,10 +9,6 @@ import services.patient.PatientService;
 
 public class ReceptionistController {
 
-	/**
-	 * @params patientService - business logic for patient
-	 */
-
 	private PatientService patientService;
 
 	public ReceptionistController() {
@@ -46,7 +42,6 @@ public class ReceptionistController {
 	public void addPacientToQueue(int id, Priority priority) throws Exception{
 		try {
 			this.patientService.addToQueue(id, priority);
-			//System.out.println("Paciente " + patient.getName() + " adicionado a fila");
 		}catch(RuntimeException e) {
 			e.getStackTrace();
 		}

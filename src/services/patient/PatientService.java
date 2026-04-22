@@ -9,19 +9,25 @@ import infra.exceptions.InvalidPhoneNumber;
 import infra.exceptions.PatientErrorException;
 import models.data_structures.DoubleLinkedList.DoubleLinkedList;
 import models.data_structures.Queue.Queue;
+import models.entities.HistoryType;
 import models.entities.Patient;
 import models.entities.Priority;
 import repositories.PatientRepository;
+import services.history.HistoryService;
 
 public class PatientService {
 	
 	private DoubleLinkedList patients;
 	private Queue queue;
-	private PatientRepository patientRepository = new PatientRepository();
+	private PatientRepository patientRepository;
+	
+	private HistoryService historyService;
 	
 	public PatientService() {
+		this.patientRepository = new PatientRepository();
 		this.patients = patientRepository.findAll();
 		this.queue = new Queue();
+		this.historyService = new HistoryService();
 	}
 	
 	public Patient register(PatientRegisterRequest data) throws Exception{
@@ -40,6 +46,7 @@ public class PatientService {
 			throw new PatientErrorException("User already exists");
 		}
 
+		this.historyService.addToHistory("Registration: Patient - " + patient.getName(), HistoryType.REGISTRATION);
 		return patient;
 	}
 
@@ -79,6 +86,7 @@ public class PatientService {
 	}
 
 	public void updatePatient(Patient patient){
+		this.historyService.addToHistory("Update: Doctor - " + patient.getName(), HistoryType.UPDATE);
 		patientRepository.update(patient);
 	}
 	

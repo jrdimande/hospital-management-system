@@ -1,13 +1,12 @@
 package repositories;
 
-import models.data_structures.DoubleLinkedList.DoubleLinkedList;
-import models.data_structures.Stack.Stack;
-import models.entities.Appointment;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import models.data_structures.Stack.Stack;
+import models.entities.Appointment;
 
 public class AppointmentRepository {
 
@@ -65,6 +64,7 @@ public class AppointmentRepository {
                 appointments.push(appointment);
 
             }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }

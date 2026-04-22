@@ -1,8 +1,10 @@
 package models.entities;
 
 public class Doctor implements Identifiable, Nameable{
-    private int id;
-    private String name;
+    
+	private int id;
+    
+	private String name;
     private String speciality;
     private String phoneNumber;
     private String password;
