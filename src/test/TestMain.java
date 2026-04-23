@@ -43,7 +43,7 @@ public class TestMain {
 	private static void testHistory() throws Exception{
 		HistoryService historyService = new HistoryService();
 		
-		System.out.println(historyService.listHistory());
+		System.out.println(historyService.listHistory().peek());
 	}
 	
 }

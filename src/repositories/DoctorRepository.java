@@ -107,7 +107,7 @@ public class DoctorRepository {
     }
 
     public void update(Doctor doctor){
-        String sql = "UPDATE SET doctors name = ?, speciality = ?, phone = ?, password = ? where id = ?";
+        String sql = "UPDATE doctors SET name = ?, speciality = ?, phone = ?, password = ? WHERE id = ?";
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)){
@@ -116,6 +116,7 @@ public class DoctorRepository {
             ps.setString(3, doctor.getPhoneNumber());
             ps.setString(4, doctor.getPassword());
             ps.setInt(5, doctor.getId());
+            ps.executeUpdate();
 
         }catch (SQLException e){
             e.printStackTrace();

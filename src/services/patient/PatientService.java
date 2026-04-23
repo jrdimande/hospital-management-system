@@ -33,6 +33,7 @@ public class PatientService {
 	public Patient register(PatientRegisterRequest data) throws Exception{
 		this.verifyUserData(data);
 		int id = patientRepository.save(data);
+		data.setId(id);
 
 		Patient patient = new Patient(data.getName(),
 				data.getAge(),
@@ -69,6 +70,10 @@ public class PatientService {
 		
 		if(!patients.contain(patient.getId())) {
 			throw new PatientErrorException("Patient not registred");
+		}
+
+		if (queue.contain(id)){
+			throw new IllegalArgumentException("Paciente ja esta na fila");
 		}
 		
 		patient.setPriority(priority);
@@ -115,7 +120,7 @@ public class PatientService {
 			throw new InvalidPhoneNumber("Phone number cannot be null");
 		}
 		
-		if(!data.getPhoneNumber().matches("^(258)(82|83|84|85|86|87)[0-9]{7}$")) {
+		if(!data.getPhoneNumber().matches("^(82|83|84|85|86|87)[0-9]{7}$")) {
 			throw new InvalidPhoneNumber("Invalid phone number");
 		}
 	}

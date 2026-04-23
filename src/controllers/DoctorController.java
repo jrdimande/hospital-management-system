@@ -1,18 +1,25 @@
 package controllers;
 
+import models.data_structures.DoubleLinkedList.DoubleLinkedList;
 import models.entities.Doctor;
+import repositories.DoctorRepository;
 import services.doctor.DoctorResgisterRequest;
 import services.doctor.DoctorService;
 
 public class DoctorController {
 	
 	private DoctorService doctorService;
+	private DoctorRepository doctorRepository;
+
+	public DoctorController(){
+		doctorService = new DoctorService();
+	}
 	
-	public void register(DoctorResgisterRequest data) throws Exception{
+	public void register(DoctorResgisterRequest data) {
 		try {
 			this.doctorService.registerDoctor(data);
 		}catch(Exception e) {
-			throw e;
+			e.printStackTrace();
 		}
 	}
 
@@ -32,12 +39,17 @@ public class DoctorController {
 		}
 	}
 	
-	public void check(Doctor doctor, String note) {
+	public void check(String patient, String doctor, String note) {
 		try {
-			this.check(doctor, note);
+			doctorService.checkPatitient(patient, doctor, note);
 		}catch(Exception e) {
-			throw e;
+			e.printStackTrace();
+
 		}
+	}
+
+	public DoubleLinkedList loadDoctors(){
+		return doctorService.getDoctors();
 	}
 
 }

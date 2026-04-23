@@ -15,12 +15,12 @@ public class ReceptionistController {
 		this.patientService = new PatientService();
 	}
 
-	public Patient registerPatient(PatientRegisterRequest data) throws Exception{
+	public Patient registerPatient(PatientRegisterRequest data) {
 		try {
 			return this.patientService.register(data);
 		}catch(Exception e) {
-			throw e;
-		}
+			e.printStackTrace();
+		}return null;
 	}
 
 	public void removePatient(int id){
@@ -39,10 +39,10 @@ public class ReceptionistController {
 		}
 	}
 
-	public void addPacientToQueue(int id, Priority priority) throws Exception{
+	public void addPacientToQueue(int id, Priority priority) {
 		try {
 			this.patientService.addToQueue(id, priority);
-		}catch(RuntimeException e) {
+		}catch(Exception e) {
 			e.getStackTrace();
 		}
 	}

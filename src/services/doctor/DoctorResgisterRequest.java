@@ -1,7 +1,7 @@
 package services.doctor;
 
 public class DoctorResgisterRequest {
-	
+	private int id;
 	private String name;
 	private String speciality;
 	private String phoneNumber;
@@ -25,6 +25,14 @@ public class DoctorResgisterRequest {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getPassword() {

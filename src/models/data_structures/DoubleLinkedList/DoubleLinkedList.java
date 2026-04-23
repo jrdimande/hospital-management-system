@@ -168,4 +168,8 @@ public class DoubleLinkedList {
         return doctor;
     }
 
+    public Node getHead() {
+        return head;
+    }
+
 }

@@ -80,7 +80,11 @@ public class PatientRepository {
     }
 
     public void update(Patient patient){
-        String sql = "UPDATE SET patients name = ?, age = ?, gender = ?, phone = ?, address = ? where id = ?";
+        String sql = """
+UPDATE patients
+SET name = ?, age = ?, gender = ?, phone = ?, address = ?
+WHERE id = ?
+""";
 
         try(Connection connection = DBConnection.getConnection();
         PreparedStatement ps = connection.prepareStatement(sql)){

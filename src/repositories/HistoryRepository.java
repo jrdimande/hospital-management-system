@@ -11,27 +11,34 @@ import models.entities.History;
 import models.entities.HistoryType;
 
 public class HistoryRepository {
-	
+
 	public void save(History history) {
-		String sql = "INSERT INTO history(history_type, created_at, details) VALUES(?::h_type, ?, ?)";
-	
-		try(Connection connection = DBConnection.getConnection();
-				PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)){
-			ps.setString(2, history.getHistoryType().name());
+
+		String sql = "INSERT INTO history(history_type, created_at, details) VALUES(?, ?, ?)";
+
+		try (
+				Connection connection = DBConnection.getConnection();
+				PreparedStatement ps = connection.prepareStatement(
+						sql,
+						PreparedStatement.RETURN_GENERATED_KEYS)
+		) {
+
+			ps.setString(1, history.getHistoryType().name());
+
 			Timestamp time = Timestamp.valueOf(history.getCreatedAt());
-			
-			ps.setTimestamp(3, time);
-			ps.setString(4, history.getDetails());
+			ps.setTimestamp(2, time);
+
+			ps.setString(3, history.getDetails()); // IMPORTANTE
+
 			ps.executeUpdate();
-			
+
 			ResultSet rs = ps.getGeneratedKeys();
-			
-			if(rs.next()) {
-				int generatedId = rs.getInt(1);
-				history.setId(generatedId);
+
+			if (rs.next()) {
+				history.setId(rs.getInt(1));
 			}
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

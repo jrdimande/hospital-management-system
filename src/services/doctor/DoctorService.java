@@ -7,6 +7,7 @@ import models.entities.Appointment;
 import models.entities.Doctor;
 import models.entities.HistoryType;
 import models.entities.Patient;
+import repositories.AppointmentRepository;
 import repositories.DoctorRepository;
 import services.history.HistoryService;
 
@@ -16,12 +17,14 @@ public class DoctorService {
 	private Queue patientsQueue;
 	private HistoryService historyService;
 	private DoctorRepository doctorRepository;
+	private AppointmentRepository appointmentRepository;
 
 	public DoctorService(){
-		this.doctors = doctorRepository.findAll();
 		this.doctorRepository = new DoctorRepository();
+		this.doctors = doctorRepository.findAll();
 		this.historyService = new HistoryService();
 		this.patientsQueue = new Queue();
+		this.appointmentRepository = new AppointmentRepository();
 	}
 	
 	public Doctor registerDoctor(DoctorResgisterRequest data) throws Exception{
@@ -36,6 +39,7 @@ public class DoctorService {
 		}
 
 		int id = doctorRepository.save(data);
+		data.setId(id);
 		doctor.setId(id);
 
 		this.doctors.add(doctor);
@@ -55,13 +59,19 @@ public class DoctorService {
 			doctorRepository.delete(id);
 		}
 	}
+
+	public DoubleLinkedList getDoctors(){
+		return doctorRepository.findAll();
+	}
 	
-	public Appointment checkPatitient(Doctor doctor, String notes) throws Exception{
-		Patient patient = this.patientsQueue.peek();
+	public Appointment checkPatitient(String patient, String doctor, String notes) throws Exception{
+		//Patient patient = this.patientsQueue.peek();
+
+		Appointment appointment = new Appointment(patient, doctor, notes);
+		appointmentRepository.save(appointment);
+
 		
-		Appointment appointment = new Appointment(patient.getName(), doctor.getName(), notes);
-		
-		this.historyService.addToHistory("Appointment: Doctor - " + doctor.getName() + " | Patient - " + patient.getName(), HistoryType.APPOINTMENT);
+		this.historyService.addToHistory("Appointment: Doctor - " + doctor + " | Patient - " + patient, HistoryType.APPOINTMENT);
 		this.patientsQueue.dequeue();
 		
 		return appointment;

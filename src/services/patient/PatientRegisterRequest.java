@@ -3,7 +3,7 @@ package services.patient;
 import models.entities.Gender;
 
 public class PatientRegisterRequest {
-	
+	private int id;
 	private String name;
 	private Integer age;
 	private Gender gender;
@@ -51,7 +51,12 @@ public class PatientRegisterRequest {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }
