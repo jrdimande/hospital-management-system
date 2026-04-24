@@ -1,0 +1,129 @@
+package views.components;
+
+import javax.swing.*;
+import java.awt.*;
+import com.formdev.flatlaf.FlatClientProperties;
+
+public class CardDash extends JPanel {
+    private int number;
+    private String text;
+    private String color;
+    private String name;
+
+    public CardDash(String name, String text, String color){
+        this.name = name;
+        this.text = text;
+        this.color = color;
+
+        setLayout(new GridBagLayout());
+        putClientProperty(FlatClientProperties.STYLE, "arc:16");
+        setBackground(Color.decode("#f8f7ff"));
+        setPreferredSize(new Dimension(new Dimension(300, 200)));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 0, 10, 0);
+
+        // Color
+        JPanel topPanel = new JPanel();
+        topPanel.putClientProperty(FlatClientProperties.STYLE, "arc:12");
+        topPanel.setBackground(Color.decode("#" + this.color));
+        topPanel.setPreferredSize(new Dimension(268, 20));
+
+        gbc.gridx = 0;
+        gbc.gridy= 0;
+        add(topPanel, gbc);
+
+
+        // Name
+        JPanel numberPanel = new JPanel(new GridBagLayout());
+        numberPanel.setBackground(Color.decode("#f8f7ff"));
+        numberPanel.setPreferredSize(new Dimension(200, 100));
+
+        JLabel numberLabel = new JLabel(this.name);
+        numberLabel.setForeground(Color.decode("#"+this.color));
+        numberLabel.setFont(new Font("Arial", Font.BOLD, 35));
+
+        numberPanel.add(numberLabel);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(numberPanel, gbc);
+
+        // Text
+        JPanel textPanel = new JPanel(new GridBagLayout());
+        textPanel.setBackground(Color.decode("#f8f7ff"));
+        textPanel.setPreferredSize(new Dimension(200, 45));
+        JLabel textLabel = new JLabel(this.text);
+        textLabel.setForeground(Color.decode("#6c757d"));
+        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
+
+        textPanel.add(textLabel);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(textPanel, gbc);
+
+
+    }
+    public CardDash(int number, String text, String color){
+        this.number = number;
+        this.text = text;
+        this.color = color;
+
+
+        setLayout(new GridBagLayout());
+        putClientProperty(FlatClientProperties.STYLE, "arc:16");
+        setBackground(Color.decode("#f8f7ff"));
+        setPreferredSize(new Dimension(new Dimension(300, 200)));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 0, 10, 0);
+
+        // Color
+        JPanel topPanel = new JPanel();
+        topPanel.putClientProperty(FlatClientProperties.STYLE, "arc:12");
+        topPanel.setBackground(Color.decode("#" + this.color));
+        topPanel.setPreferredSize(new Dimension(268, 20));
+
+        gbc.gridx = 0;
+        gbc.gridy= 0;
+        add(topPanel, gbc);
+
+
+        // Number
+        JPanel numberPanel = new JPanel(new GridBagLayout());
+        numberPanel.setBackground(Color.decode("#f8f7ff"));
+        numberPanel.setPreferredSize(new Dimension(200, 100));
+
+        JLabel numberLabel = new JLabel(String.valueOf(this.number));
+        numberLabel.setForeground(Color.decode("#"+this.color));
+        numberLabel.setFont(new Font("Arial", Font.BOLD, 48));
+
+        numberPanel.add(numberLabel);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(numberPanel, gbc);
+
+        // Text
+        JPanel textPanel = new JPanel(new GridBagLayout());
+        textPanel.setBackground(Color.decode("#f8f7ff"));
+        textPanel.setPreferredSize(new Dimension(200, 45));
+        JLabel textLabel = new JLabel(this.text);
+        textLabel.setForeground(Color.decode("#6c757d"));
+        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
+
+        textPanel.add(textLabel);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(textPanel, gbc);
+
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+}
