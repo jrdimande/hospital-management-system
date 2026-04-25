@@ -18,9 +18,11 @@ import models.entities.Gender;
 import models.entities.Patient;
 import models.entities.Priority;
 import services.patient.PatientRegisterRequest;
+import views.home.DashboardPanel;
+import views.home.QueuePanel;
 
 public class PatientPanel extends JPanel {
-    public PatientPanel(ReceptionistController rec){
+    public PatientPanel(ReceptionistController rec, QueuePanel queuePanel, DashboardPanel dash){
         setLayout(new GridBagLayout());
         setBackground(Color.decode("#ffffff"));
         putClientProperty(FlatClientProperties.STYLE, "arc:16");
@@ -577,12 +579,14 @@ public class PatientPanel extends JPanel {
         addToQueueBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int row = table.getSelectedRow();
+                int viewRow = table.getSelectedRow();
 
-                if (row == -1){
-                    JOptionPane.showMessageDialog(null, "Selecione um paciente para adicionar na fila!");
+                if (viewRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Selecione um paciente!");
                     return;
                 }
+
+                int row = table.convertRowIndexToModel(viewRow);
 
                 JPanel priorityPanel = new JPanel(new GridBagLayout());
                 priorityPanel.setPreferredSize(new Dimension(400, 400));
@@ -626,6 +630,17 @@ public class PatientPanel extends JPanel {
                             p = Priority.HIGH;
                         }
                         rec.addPacientToQueue((int)modelTable.getValueAt(row, 0), p);
+
+                        queuePanel.addPatient((int) modelTable.getValueAt(row, 0),
+                                rec.getPatientQueue().size(),
+                                String.valueOf(modelTable.getValueAt(row, 1)),
+                                combo.getSelectedItem().toString());
+
+                        dash.getNumberOfPatients().add(rec.getPatientQueue().size());
+                        dash.getHighPriority().add(rec.countHighPriority());
+
+
+
                         JOptionPane.showMessageDialog(dialog, "Paciente adicionado com sucesso!");
                         dialog.dispose();
 

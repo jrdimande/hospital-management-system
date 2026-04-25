@@ -102,5 +102,26 @@ WHERE id = ?
 
     }
 
+    public int getIdByName(String name) {
+        String sql = "SELECT id FROM patients WHERE name = ?";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, name);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1; // não encontrado
+    }
+
 
 }

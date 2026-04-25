@@ -8,6 +8,7 @@ import infra.exceptions.InvalidAgeException;
 import infra.exceptions.InvalidPhoneNumber;
 import infra.exceptions.PatientErrorException;
 import models.data_structures.DoubleLinkedList.DoubleLinkedList;
+import models.data_structures.Queue.Node;
 import models.data_structures.Queue.Queue;
 import models.entities.HistoryType;
 import models.entities.Patient;
@@ -93,6 +94,28 @@ public class PatientService {
 	public void updatePatient(Patient patient){
 		this.historyService.addToHistory("Update: Doctor - " + patient.getName(), HistoryType.UPDATE);
 		patientRepository.update(patient);
+	}
+
+	public int counHighPriority(){
+		if (queue.getHead() == null){
+			return 0;
+		}
+
+		Node current = queue.getHead();
+		int counter = 0;
+
+		while (current != null){
+			if (current.getPatient().getPriority() == Priority.HIGH){
+				counter++;
+			}
+			current = current.getNext();
+		}
+		return counter;
+
+	}
+
+	public int getIdByName(String name){
+		return patientRepository.getIdByName(name);
 	}
 	
 	private void verifyUserData(PatientRegisterRequest data) throws Exception{

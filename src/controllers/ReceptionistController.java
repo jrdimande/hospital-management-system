@@ -47,6 +47,14 @@ public class ReceptionistController {
 		}
 	}
 
+	public int getIdByName(String name){
+		return patientService.getIdByName(name);
+	}
+
+	public int countHighPriority(){
+		return patientService.counHighPriority();
+	}
+
 	public Queue getPatientQueue() {
 		return this.patientService.listPatientsQueue();
 	}

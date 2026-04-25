@@ -13,8 +13,8 @@ public class PieChartPanel extends JPanel {
     public PieChartPanel() {
 
         setLayout(new BorderLayout());
-        putClientProperty(FlatClientProperties.STYLE, "arc:16; background:#ffffff;");
-        setBackground(Color.decode("#ffffff"));
+        putClientProperty(FlatClientProperties.STYLE, "arc:16; background:#edf2fb;");
+        setBackground(Color.decode("#edf2fb"));
 
 
         PieChart chart = new PieChartBuilder()
@@ -27,13 +27,13 @@ public class PieChartPanel extends JPanel {
         chart.addSeries("Urgente", 25);
         chart.addSeries("Prioritário", 15);
 
-        chart.getStyler().setChartBackgroundColor(Color.decode("#ffffff"));
-        chart.getStyler().setPlotBackgroundColor(Color.WHITE);
+        chart.getStyler().setChartBackgroundColor(Color.decode("#edf2fb"));
+        chart.getStyler().setPlotBackgroundColor(Color.decode("#edf2fb"));
         chart.getStyler().setPlotBorderVisible(false);
 
 
         XChartPanel<PieChart> chartPanel = new XChartPanel<>(chart);
-        chartPanel.setBackground(Color.decode("#ffffff"));
+        chartPanel.setBackground(Color.decode("#edf2fb"));
 
         add(chartPanel, BorderLayout.CENTER);
     }

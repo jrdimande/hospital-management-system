@@ -9,6 +9,8 @@ public class CardDash extends JPanel {
     private String text;
     private String color;
     private String name;
+    private JLabel nameLabel;
+    private JLabel numberLabel;
 
     public CardDash(String name, String text, String color){
         this.name = name;
@@ -38,11 +40,11 @@ public class CardDash extends JPanel {
         numberPanel.setBackground(Color.decode("#f8f7ff"));
         numberPanel.setPreferredSize(new Dimension(200, 100));
 
-        JLabel numberLabel = new JLabel(this.name);
-        numberLabel.setForeground(Color.decode("#"+this.color));
-        numberLabel.setFont(new Font("Arial", Font.BOLD, 35));
+        nameLabel = new JLabel(this.name);
+        nameLabel.setForeground(Color.decode("#"+this.color));
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
-        numberPanel.add(numberLabel);
+        numberPanel.add(nameLabel);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -93,7 +95,7 @@ public class CardDash extends JPanel {
         numberPanel.setBackground(Color.decode("#f8f7ff"));
         numberPanel.setPreferredSize(new Dimension(200, 100));
 
-        JLabel numberLabel = new JLabel(String.valueOf(this.number));
+        numberLabel = new JLabel(String.valueOf(this.number));
         numberLabel.setForeground(Color.decode("#"+this.color));
         numberLabel.setFont(new Font("Arial", Font.BOLD, 48));
 
@@ -119,11 +121,31 @@ public class CardDash extends JPanel {
 
     }
 
-    public int getNumber() {
-        return number;
+    public void setName(String name) {
+        this.name = name;
+        nameLabel.setText(name);
+
+        revalidate();
+        repaint();
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void add(int number){
+        this.number =+ number;
+        this.numberLabel.setText(String.valueOf(this.number));
+        revalidate();
+        repaint();
+
+    }
+
+    public void remove(int number){
+        this.number =- number;
+        this.numberLabel.setText(String.valueOf(this.number));
+        revalidate();
+        repaint();
+
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

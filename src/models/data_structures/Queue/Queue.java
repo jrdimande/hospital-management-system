@@ -73,4 +73,8 @@ public class Queue {
         }
         return false;
     }
+
+    public Node getHead(){
+        return this.head;
+    }
 }

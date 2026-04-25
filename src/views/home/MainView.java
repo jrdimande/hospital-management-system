@@ -1,4 +1,4 @@
-package views;
+package views.home;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
@@ -19,6 +19,9 @@ public class MainView {
     private ReceptionistController rec;
     private DoctorController doc;
     private CardLayout cardLayout;
+    private QueuePanel queuePanel;
+    private DashboardPanel dashboardPanel;
+    private DoctorPanel  doctorPanel;
 
     public MainView() {
         root = new JFrame("HCM");
@@ -36,9 +39,14 @@ public class MainView {
 
         cardLayout = new CardLayout();
         contentPanel = new JPanel(cardLayout);
+        queuePanel = new QueuePanel();
+        dashboardPanel = new DashboardPanel(rec, doc);
+        doctorPanel = new DoctorPanel(doc, rec, queuePanel,dashboardPanel);
 
-        contentPanel.add(new PatientPanel(rec), "Pacientes");
-        contentPanel.add(new DoctorPanel(doc, rec), "Médicos");
+        contentPanel.add(dashboardPanel, "Dashboard");
+        contentPanel.add(queuePanel, "Fila");
+        contentPanel.add(new PatientPanel(rec, queuePanel,dashboardPanel), "Pacientes");
+        contentPanel.add(doctorPanel, "Médicos");
         root.add(contentPanel, BorderLayout.CENTER);
 
 
@@ -173,6 +181,20 @@ public class MainView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(contentPanel,"Médicos");
+            }
+        });
+
+        queueBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(contentPanel, "Fila");
+            }
+        });
+
+        dashboardBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(contentPanel, "Dashboard");
             }
         });
 

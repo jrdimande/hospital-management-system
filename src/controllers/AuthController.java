@@ -8,7 +8,7 @@ public class AuthController {
 	
 	private AuthService authService;
 	
-	public Object login(LoginRequestData data, View view) {
-		return this.authService.login(data, view);
+	public Object login(LoginRequestData data) {
+		return this.authService.loginDoctor(data);
 	}
 }

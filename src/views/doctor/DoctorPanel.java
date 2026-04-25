@@ -10,6 +10,8 @@ import models.entities.Doctor;
 import models.entities.Patient;
 import models.entities.Priority;
 import services.doctor.DoctorResgisterRequest;
+import views.home.DashboardPanel;
+import views.home.QueuePanel;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -21,7 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DoctorPanel extends JPanel {
-    public DoctorPanel(DoctorController doc, ReceptionistController rec){
+    public DoctorPanel(DoctorController doc, ReceptionistController rec, QueuePanel queuePanel, DashboardPanel dash){
         setLayout(new GridBagLayout());
         setBackground(Color.decode("#ffffff"));
         putClientProperty(FlatClientProperties.STYLE, "arc:16");
@@ -696,6 +698,13 @@ public class DoctorPanel extends JPanel {
                     String notes = notesArea.getText();
                     doc.check(patientField.getText(), String.valueOf(modelTable.getValueAt(row, 1)), notesArea.getText());
                     rec.getPatientQueue().dequeue();
+                    queuePanel.removePatient(rec.getIdByName(patientNameField.getText()));
+                    dash.getNumberOfPatients().remove(rec.getPatientQueue().size());
+
+                    if (rec.getPatientQueue().size() == 0){
+                        dash.getNextPatient().setName("Nenhum");
+                    }
+
 
 
                     JOptionPane.showMessageDialog(null,
@@ -713,6 +722,7 @@ public class DoctorPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 Patient p = rec.getPatientQueue().peek();
+                dash.getNextPatient().setName(p.getName());
 
                 if (p == null) {
                     JOptionPane.showMessageDialog(null, "Fila vazia!");
@@ -723,6 +733,7 @@ public class DoctorPanel extends JPanel {
 
                 if (p.getPriority() != null && p.getPriority() == Priority.HIGH) {
                     priority = "URGENTE";
+                    //dash.getHighPriority().remove(1);
                 } else {
                     priority = "NORMAL";
                 }
