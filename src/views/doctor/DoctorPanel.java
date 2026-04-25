@@ -661,7 +661,12 @@ public class DoctorPanel extends JPanel {
                 patientField.putClientProperty(FlatClientProperties.STYLE, "arc:16");
                 patientField.putClientProperty("JTextField.placeholderText", "Nome do paciente");
                 patientField.setEditable(false);
-                patientField.setText(rec.getPatientQueue().peek().getName());
+
+                if (rec.getPriorityQueue().size() != 0){
+                    patientField.setText(rec.getPriorityQueue().peek().getName());
+                }else {
+                    patientField.setText(rec.getPatientQueue().peek().getName());
+                }
 
                 JTextArea notesArea = new JTextArea(6, 25);
                 notesArea.putClientProperty(FlatClientProperties.STYLE, "arc:16");
@@ -697,7 +702,13 @@ public class DoctorPanel extends JPanel {
                     String patientName = patientField.getText();
                     String notes = notesArea.getText();
                     doc.check(patientField.getText(), String.valueOf(modelTable.getValueAt(row, 1)), notesArea.getText());
-                    rec.getPatientQueue().dequeue();
+
+                    if (rec.getPriorityQueue().size() != 0){
+                        rec.getPriorityQueue().poll();
+                    }else {
+                        rec.getPatientQueue().dequeue();
+                    }
+
                     queuePanel.removePatient(rec.getIdByName(patientNameField.getText()));
                     dash.getNumberOfPatients().remove(rec.getPatientQueue().size());
 
@@ -720,8 +731,15 @@ public class DoctorPanel extends JPanel {
         callBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Patient p = null;
 
-                Patient p = rec.getPatientQueue().peek();
+                if (rec.getPriorityQueue().size() != 0){
+                    p = rec.getPriorityQueue().peek();
+
+                }else {
+                    p = rec.getPatientQueue().peek();
+                }
+
                 dash.getNextPatient().setName(p.getName());
 
                 if (p == null) {

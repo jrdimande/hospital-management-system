@@ -60,13 +60,13 @@ public class DashboardPanel extends JPanel {
         GridBagConstraints gbcCards = new GridBagConstraints();
         gbcCards.insets = new Insets(5, 15,15,5);
 
-        numberOfPatients = new CardDash(rec.getPatientQueue().size(), "Pacientes na Fila", "0582ca");
+        numberOfPatients = new CardDash(rec.getPatientQueue().size() + rec.getPriorityQueue().size(), "Pacientes na Fila", "0582ca");
         cardsPanel.add(numberOfPatients, gbcCards);
 
         availableDoctors = new CardDash(doc.loadDoctors().size(), "Médicos Disponíveis", "25a244");
         cardsPanel.add(availableDoctors, gbcCards);
 
-        if (rec.getPatientQueue().peek() == null || rec.getPatientQueue().size() == 0){
+        if (rec.getPatientQueue().peek() == null || rec.getPatientQueue().size() == 0 || rec.getPriorityQueue().size() == 0){
             nextPatient = new CardDash("Fila Vazia", "Próximo Paciente", "5a189a");
             cardsPanel.add(nextPatient, gbcCards);
         }else {
@@ -75,7 +75,7 @@ public class DashboardPanel extends JPanel {
         }
 
 
-        highPriority = new CardDash(rec.countHighPriority(), "Prioridade Alta", "f40000");
+        highPriority = new CardDash(rec.getPriorityQueue().size(), "Prioridade Alta", "f40000");
         cardsPanel.add(highPriority, gbcCards);
 
 

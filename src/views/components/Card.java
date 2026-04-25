@@ -72,12 +72,18 @@ public class Card extends JPanel {
             priorityPanel.setBackground(Color.decode("#b7efc5"));
             priorityLabel.setForeground(Color.decode("#208b3a"));
 
-        }else {
+        }else if (this.priority.equals("URGENTE")){
                 idPanel.setBackground(Color.decode("#db222a"));
                 idLabel.setForeground(Color.WHITE);
                 priorityPanel.setBackground(Color.decode("#f6cacc"));
                 priorityLabel.setForeground(Color.decode("#d02224"));
                 priorityPanel.setBorder(BorderFactory.createLineBorder(Color.decode("#d02224")));
+        }else {
+            idPanel.setBackground(Color.decode("#f54703"));
+            idLabel.setForeground(Color.WHITE);
+            priorityPanel.setBackground(Color.decode("#fde9c3"));
+            priorityLabel.setForeground(Color.decode("#f54703"));
+            priorityPanel.setBorder(BorderFactory.createLineBorder(Color.decode("#f54703")));
         }
 
 

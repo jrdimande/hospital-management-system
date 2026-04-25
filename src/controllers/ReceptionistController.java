@@ -1,6 +1,7 @@
 package controllers;
 
 import models.data_structures.DoubleLinkedList.DoubleLinkedList;
+import models.data_structures.Heap.PriorityQueue;
 import models.data_structures.Queue.Queue;
 import models.entities.Patient;
 import models.entities.Priority;
@@ -60,5 +61,9 @@ public class ReceptionistController {
 	}
 
 	public DoubleLinkedList getPatientList(){return this.patientService.getPatients();}
+
+	public PriorityQueue getPriorityQueue(){
+		return patientService.getPriorityQueue();
+	}
 
 }

@@ -8,6 +8,7 @@ import infra.exceptions.InvalidAgeException;
 import infra.exceptions.InvalidPhoneNumber;
 import infra.exceptions.PatientErrorException;
 import models.data_structures.DoubleLinkedList.DoubleLinkedList;
+import models.data_structures.Heap.PriorityQueue;
 import models.data_structures.Queue.Node;
 import models.data_structures.Queue.Queue;
 import models.entities.HistoryType;
@@ -17,7 +18,8 @@ import repositories.PatientRepository;
 import services.history.HistoryService;
 
 public class PatientService {
-	
+
+	private PriorityQueue priorityQueue;
 	private DoubleLinkedList patients;
 	private Queue queue;
 	private PatientRepository patientRepository;
@@ -25,6 +27,7 @@ public class PatientService {
 	private HistoryService historyService;
 	
 	public PatientService() {
+		this.priorityQueue = new PriorityQueue(100);
 		this.patientRepository = new PatientRepository();
 		this.patients = patientRepository.findAll();
 		this.queue = new Queue();
@@ -78,13 +81,22 @@ public class PatientService {
 		}
 		
 		patient.setPriority(priority);
-		this.queue.enqueue(patient);
+
+		if (priority == Priority.HIGH || priority == Priority.MEDIUM){
+			priorityQueue.add(patient);
+		}else {
+			this.queue.enqueue(patient);
+		}
 		
 		return patient;
 	}
 
 	public Queue listPatientsQueue(){
 		return this.queue;
+	}
+
+	public PriorityQueue getPriorityQueue(){
+		return priorityQueue;
 	}
 
 	public DoubleLinkedList getPatients(){

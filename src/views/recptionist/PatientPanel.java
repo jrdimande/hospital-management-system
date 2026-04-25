@@ -597,6 +597,7 @@ public class PatientPanel extends JPanel {
                 JComboBox<String> combo = new JComboBox<>();
                 combo.setPreferredSize(new Dimension(300, 40));
                 combo.addItem("NORMAL");
+                combo.addItem("MEDIA");
                 combo.addItem("URGENTE");
 
                 JButton addBtn = new JButton("Adicionar");
@@ -624,21 +625,37 @@ public class PatientPanel extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Priority p;
+
+                        if (combo.getSelectedItem().equals("URGENTE")){
+                            dash.getHighPriority().add(rec.getPriorityQueue().size() + 1);
+                        }
                         if (combo.getSelectedItem().equals("NORMAL")){
                             p = Priority.LOW;
+
+                        }else if (combo.getSelectedItem().equals("MEDIA")){
+                            p = Priority.MEDIUM;
                         }else {
                             p = Priority.HIGH;
                         }
+
                         rec.addPacientToQueue((int)modelTable.getValueAt(row, 0), p);
 
+                        int pos = 0;
+                        if (rec.getPriorityQueue().size() != 0){
+                            pos = rec.getPriorityQueue().size();
+                        }else {
+                            pos = rec.getPatientQueue().size();
+                        }
+
+
+
+
                         queuePanel.addPatient((int) modelTable.getValueAt(row, 0),
-                                rec.getPatientQueue().size(),
+                                pos,
                                 String.valueOf(modelTable.getValueAt(row, 1)),
                                 combo.getSelectedItem().toString());
 
-                        dash.getNumberOfPatients().add(rec.getPatientQueue().size());
-                        dash.getHighPriority().add(rec.countHighPriority());
-
+                        dash.getNumberOfPatients().add(rec.getPatientQueue().size() + rec.getPriorityQueue().size());
 
 
                         JOptionPane.showMessageDialog(dialog, "Paciente adicionado com sucesso!");
