@@ -87,7 +87,7 @@ public class DashboardPanel extends JPanel {
 
         // DownPanel
         JPanel downPanel = new JPanel(new GridBagLayout());
-        downPanel.setBorder(BorderFactory.createLineBorder(Color.decode("#0077b6"), 2));
+       // downPanel.setBorder(BorderFactory.createLineBorder(Color.decode("#0077b6"), 2));
         downPanel.setBackground(Color.decode("#ffffff"));
         downPanel.setPreferredSize(new Dimension(1290, 500));
         GridBagConstraints gbcDown = new GridBagConstraints();

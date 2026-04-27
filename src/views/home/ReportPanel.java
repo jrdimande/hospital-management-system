@@ -7,6 +7,8 @@ import models.data_structures.DoubleLinkedList.DoubleLinkedList;
 import views.components.CardPanel;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ReportPanel extends JPanel {
     CardPanel card1, card2, card3, card4;
@@ -22,7 +24,7 @@ public class ReportPanel extends JPanel {
         // HEADER
         JPanel titlePanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbcHeader = new GridBagConstraints();
-        gbcHeader.insets = new Insets(0, 25, 0, 0);
+        gbcHeader.insets = new Insets(0, 25, 0, 10);
 
         titlePanel.putClientProperty(FlatClientProperties.STYLE, "arc:16");
         titlePanel.setBackground(Color.decode("#eef0f2"));
@@ -41,6 +43,61 @@ public class ReportPanel extends JPanel {
 
         titlePanel.add(titleLabel, gbcHeader);
 
+        // Botão para ver histórico
+        JButton historyBtn = new JButton("Histórico");
+        historyBtn.setFont(new Font("Arial", Font.BOLD, 16));
+        historyBtn.setPreferredSize(new Dimension(100, 30));
+
+
+        gbcHeader.gridx = 1;
+        gbcHeader.gridy = 0;
+
+        gbcHeader.anchor = GridBagConstraints.EAST;
+        gbcHeader.fill = GridBagConstraints.NONE;
+        gbcHeader.weightx = 0;
+        gbcHeader.ipadx = 20;
+        gbcHeader.ipady = 10;
+
+        titlePanel.add(historyBtn, gbcHeader);
+
+        historyBtn.addActionListener(new ActionListener() {
+
+            JDialog dialog = null;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (dialog != null && dialog.isVisible()) {
+                    dialog.dispose();
+                    dialog = null;
+                    return;
+                }
+
+                dialog = new JDialog();
+                dialog.setUndecorated(true);
+                dialog.setSize(800, 500);
+
+                Point location = historyBtn.getLocationOnScreen();
+                dialog.setLocation(location.x, location.y + historyBtn.getHeight() + 5);
+
+                dialog.setContentPane(new HistoryPanel());
+
+                dialog.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+                    @Override public void windowGainedFocus(java.awt.event.WindowEvent we) {}
+                    @Override public void windowLostFocus(java.awt.event.WindowEvent we) {
+                        dialog.dispose();
+                        dialog = null;
+                    }
+                });
+
+                dialog.setVisible(true);
+            }
+        });
+
+
+
+
+
         add(titlePanel, gbc);
 
         gbc.gridx = 0;
@@ -53,7 +110,7 @@ public class ReportPanel extends JPanel {
         GridBagConstraints gbcCards = new GridBagConstraints();
         gbcCards.insets = new Insets(15, 46, 15, 46);
 
-        card1 = new CardPanel("Total atendidos", "150", "Este mês","views/assets/sidebar/patient.svg","#eef0f2");
+        card1 = new CardPanel("Total atendidos", "40", "Hoje","views/assets/sidebar/patient.svg","#eef0f2");
         gbcCards.gridx = 0;
         gbcCards.gridy = 0;
         cardsPanel.add(card1, gbcCards);
@@ -63,12 +120,12 @@ public class ReportPanel extends JPanel {
         gbcCards.gridy = 0;
         cardsPanel.add(card2, gbcCards);
 
-        card3 = new CardPanel("Total atendidos", "150", "Este mês","views/assets/sidebar/patient.svg","#eef0f2");
+        card3 = new CardPanel("Pacientes Urgentes", "83", "Este mês","views/assets/sidebar/patient.svg","#eef0f2");
         gbcCards.gridx = 0;
         gbcCards.gridy = 1;
         cardsPanel.add(card3, gbcCards);
 
-        card4 = new CardPanel("Total atendidos", "150", "Este mês","views/assets/sidebar/patient.svg","#eef0f2");
+        card4 = new CardPanel("Tempo Médio de Espera", "15 MIN", "Este mês","views/assets/sidebar/patient.svg","#eef0f2");
         gbcCards.gridx = 1;
         gbcCards.gridy = 1;
         cardsPanel.add(card4, gbcCards);
@@ -127,8 +184,6 @@ public class ReportPanel extends JPanel {
 
         gbc.gridy = 2;
         add(buttosPanel, gbc);
-
-
 
 
 

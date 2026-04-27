@@ -25,6 +25,7 @@ public class MainView {
 
     public MainView() {
         root = new JFrame("HCM");
+        root.setResizable(false);
         root.setSize(1580, 950);
         root.setLayout(new BorderLayout());
         root.setBackground(Color.decode("#ffffff"));

@@ -254,15 +254,6 @@ public class PatientPanel extends JPanel {
         }
 
 
-
-
-
-
-
-
-
-
-
         gbc.gridx = 0;
         gbc.gridy = 2;
         add(scrollPane, gbc);

@@ -384,12 +384,15 @@ public class DoctorPanel extends JPanel {
         removeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int row = table.getSelectedRow();
+                int viewRow = table.getSelectedRow();
 
-                if (row == -1){
-                    JOptionPane.showMessageDialog(null, "Selecione um médico para remover");
+                if (viewRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Selecione um Médico!");
                     return;
                 }
+
+                int row = table.convertRowIndexToModel(viewRow);
+
 
                 String nome = modelTable.getValueAt(row, 1).toString();
 
@@ -478,20 +481,6 @@ public class DoctorPanel extends JPanel {
                 }
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
