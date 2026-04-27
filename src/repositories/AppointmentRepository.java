@@ -45,14 +45,17 @@ public class AppointmentRepository {
     }
 
     public Stack findAll(){
+
         Stack appointments = new Stack();
-        String sql = "SELEC * FROM appointments";
+
+        String sql = "SELECT * FROM appointments";
 
         try(Connection connection = DBConnection.getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery()){
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()){
 
             while (rs.next()){
+
                 Appointment appointment = new Appointment();
 
                 appointment.setId(rs.getInt("id"));
@@ -64,10 +67,11 @@ public class AppointmentRepository {
                 appointments.push(appointment);
 
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return appointments;
     }
 }
