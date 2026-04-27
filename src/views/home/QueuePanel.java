@@ -176,7 +176,7 @@ public class QueuePanel extends JPanel {
 
         //gbc.fill = GridBagConstraints.BOTH;
 
-        scroll.setPreferredSize(new Dimension(1290, 500));
+        scroll.setPreferredSize(new Dimension(1290, 550));
 
         add(scroll, gbc);
 

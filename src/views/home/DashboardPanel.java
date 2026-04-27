@@ -1,6 +1,7 @@
 package views.home;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import controllers.DoctorController;
 import controllers.ReceptionistController;
 import models.data_structures.DoubleLinkedList.DoubleLinkedList;
@@ -32,7 +33,7 @@ public class DashboardPanel extends JPanel {
         gbcHeader.insets = new Insets(0, 25, 0, 0);
 
         titlePanel.putClientProperty(FlatClientProperties.STYLE, "arc:16");
-        titlePanel.setBackground(Color.decode("#dee2e6"));
+        titlePanel.setBackground(Color.decode("#e5e5e5"));
         titlePanel.setPreferredSize(new Dimension(1290, 70));
 
         JLabel titleLabel = new JLabel("Dashboard");
@@ -55,7 +56,7 @@ public class DashboardPanel extends JPanel {
 
         // Cards
         JPanel cardsPanel = new JPanel(new GridBagLayout());
-        cardsPanel.setBackground(Color.decode("#edf2fb"));
+        cardsPanel.setBackground(Color.decode("#ffffff"));
         cardsPanel.setPreferredSize(new Dimension(1290, 250));
         GridBagConstraints gbcCards = new GridBagConstraints();
         gbcCards.insets = new Insets(5, 15,15,5);
@@ -86,12 +87,14 @@ public class DashboardPanel extends JPanel {
 
         // DownPanel
         JPanel downPanel = new JPanel(new GridBagLayout());
+        downPanel.setBorder(BorderFactory.createLineBorder(Color.decode("#0077b6"), 2));
         downPanel.setBackground(Color.decode("#ffffff"));
         downPanel.setPreferredSize(new Dimension(1290, 500));
         GridBagConstraints gbcDown = new GridBagConstraints();
         gbcDown.insets = new Insets(10, 20, 10, 20);
 
         // Ações rápidas
+
 
         JPanel buttonsPanel = new JPanel(new GridBagLayout());
         buttonsPanel.setBackground(Color.decode("#edf2fb"));
@@ -100,31 +103,41 @@ public class DashboardPanel extends JPanel {
         GridBagConstraints gbcBtns = new GridBagConstraints();
         gbcBtns.insets = new Insets(10, 10, 10, 10);
 
+        // Buttons
+        FlatSVGIcon addIcon = new FlatSVGIcon("views/assets/receptionist/add.svg", 30, 30);
+        addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.WHITE));
 
-        JButton addPatientBtn = new JButton("Registrar Paciente");
+        FlatSVGIcon seeIcon = new FlatSVGIcon("views/assets/dashboard/see.svg", 30, 30);
+        seeIcon.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.WHITE));
+
+        FlatSVGIcon updateIcon = new FlatSVGIcon("views/assets/receptionist/update.svg", 35, 35);
+        updateIcon.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.WHITE));
+
+
+        JButton addPatientBtn = new JButton("Registrar Paciente", addIcon);
         addPatientBtn.setBackground(Color.decode("#0077b6"));
         addPatientBtn.setForeground(Color.WHITE);
-        addPatientBtn.setPreferredSize(new Dimension(350, 50));
+        addPatientBtn.setPreferredSize(new Dimension(380, 50));
         addPatientBtn.setFont(new Font("Arial", Font.BOLD, 16));
 
         gbcBtns.gridx = 0;
         gbc.gridy = 0;
         buttonsPanel.add(addPatientBtn, gbcBtns);
 
-        JButton seeQueueBtn = new JButton("Ver Fila");
+        JButton seeQueueBtn = new JButton("Ver Fila", seeIcon);
         seeQueueBtn.setBackground(Color.decode("#7b2cbf"));
         seeQueueBtn.setForeground(Color.WHITE);
-        seeQueueBtn.setPreferredSize(new Dimension(350, 50));
+        seeQueueBtn.setPreferredSize(new Dimension(380, 50));
         seeQueueBtn.setFont(new Font("Arial", Font.BOLD, 16));
 
         gbcBtns.gridx = 0;
         gbc.gridy = 1;
         buttonsPanel.add(seeQueueBtn, gbcBtns);
 
-        JButton updateDataBtn = new JButton("Atualizar Dados");
+        JButton updateDataBtn = new JButton("Atualizar Dados", updateIcon);
         updateDataBtn.setForeground(Color.WHITE);
         updateDataBtn.setBackground(Color.decode("#f56416"));
-        updateDataBtn.setPreferredSize(new Dimension(350, 50));
+        updateDataBtn.setPreferredSize(new Dimension(380, 50));
         updateDataBtn.setFont(new Font("Arial", Font.BOLD, 16));
 
         gbcDown.gridx = 0;

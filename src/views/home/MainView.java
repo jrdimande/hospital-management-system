@@ -47,6 +47,7 @@ public class MainView {
         contentPanel.add(queuePanel, "Fila");
         contentPanel.add(new PatientPanel(rec, queuePanel,dashboardPanel), "Pacientes");
         contentPanel.add(doctorPanel, "Médicos");
+        contentPanel.add(new ReportPanel(), "Relatórios");
         root.add(contentPanel, BorderLayout.CENTER);
 
 
@@ -152,6 +153,31 @@ public class MainView {
                 "arc:16"
         );
 
+        JLabel suggestionLabel = new JLabel();
+        suggestionLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        suggestionLabel.setVerticalAlignment(SwingConstants.CENTER);
+        suggestionPanel.add(suggestionLabel);
+
+        String[] banners = {
+                "src/views/assets/sidebar/banner_mascara.png",
+                "src/views/assets/sidebar/banner_lavar_maos.png",
+                "src/views/assets/sidebar/banner_desinfectar.png"
+        };
+
+        final int[] index = {0};
+
+        Runnable trocarImagem = () -> {
+            ImageIcon icon = new ImageIcon(banners[index[0]]);
+            Image img = icon.getImage().getScaledInstance(230, 190, Image.SCALE_SMOOTH);
+            suggestionLabel.setIcon(new ImageIcon(img));
+            index[0] = (index[0] + 1) % banners.length;
+        };
+
+        trocarImagem.run();
+
+        Timer timer = new Timer(30000, e -> trocarImagem.run());
+        timer.start();
+
         for (int i = 8; i < 13; i++) {
             JPanel p = new JPanel();
             p.setBackground(Color.decode("#09509c"));
@@ -169,6 +195,13 @@ public class MainView {
         gbcSidebar.gridx = 0;
         gbcSidebar.gridy = 26;
         sidebar.add(exitBtn, gbcSidebar);
+
+        exitBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                root.dispose();
+            }
+        });
 
         patientsBtn.addActionListener(new ActionListener() {
             @Override
@@ -195,6 +228,13 @@ public class MainView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(contentPanel, "Dashboard");
+            }
+        });
+
+        reportBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(contentPanel, "Relatórios");
             }
         });
 

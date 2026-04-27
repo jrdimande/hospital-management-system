@@ -19,7 +19,7 @@ public class CardDash extends JPanel {
 
         setLayout(new GridBagLayout());
         putClientProperty(FlatClientProperties.STYLE, "arc:16");
-        setBackground(Color.decode("#f8f7ff"));
+        setBackground(Color.decode("#eef0f2"));
         setPreferredSize(new Dimension(new Dimension(300, 200)));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(0, 0, 10, 0);
@@ -37,7 +37,7 @@ public class CardDash extends JPanel {
 
         // Name
         JPanel numberPanel = new JPanel(new GridBagLayout());
-        numberPanel.setBackground(Color.decode("#f8f7ff"));
+        numberPanel.setBackground(Color.decode("#eef0f2"));
         numberPanel.setPreferredSize(new Dimension(200, 100));
 
         nameLabel = new JLabel(this.name);
@@ -52,7 +52,7 @@ public class CardDash extends JPanel {
 
         // Text
         JPanel textPanel = new JPanel(new GridBagLayout());
-        textPanel.setBackground(Color.decode("#f8f7ff"));
+        textPanel.setBackground(Color.decode("#eef0f2"));
         textPanel.setPreferredSize(new Dimension(200, 45));
         JLabel textLabel = new JLabel(this.text);
         textLabel.setForeground(Color.decode("#6c757d"));
@@ -74,7 +74,7 @@ public class CardDash extends JPanel {
 
         setLayout(new GridBagLayout());
         putClientProperty(FlatClientProperties.STYLE, "arc:16");
-        setBackground(Color.decode("#f8f7ff"));
+        setBackground(Color.decode("#eef0f2"));
         setPreferredSize(new Dimension(new Dimension(300, 200)));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(0, 0, 10, 0);
@@ -92,7 +92,7 @@ public class CardDash extends JPanel {
 
         // Number
         JPanel numberPanel = new JPanel(new GridBagLayout());
-        numberPanel.setBackground(Color.decode("#f8f7ff"));
+        numberPanel.setBackground(Color.decode("#eef0f2"));
         numberPanel.setPreferredSize(new Dimension(200, 100));
 
         numberLabel = new JLabel(String.valueOf(this.number));
@@ -107,7 +107,7 @@ public class CardDash extends JPanel {
 
         // Text
         JPanel textPanel = new JPanel(new GridBagLayout());
-        textPanel.setBackground(Color.decode("#f8f7ff"));
+        textPanel.setBackground(Color.decode("#eef0f2"));
         textPanel.setPreferredSize(new Dimension(200, 45));
         JLabel textLabel = new JLabel(this.text);
         textLabel.setForeground(Color.decode("#6c757d"));
