@@ -18,6 +18,7 @@ public class Stack {
         }
         newNode.setNext(this.top);
         this.top = newNode;
+        size++;
 
     }
 
@@ -26,6 +27,7 @@ public class Stack {
             return;
         }
         this.top = top.getNext();
+        size--;
     }
 
     public Object peek(){
@@ -33,6 +35,13 @@ public class Stack {
             return null;
         }
         return this.top.getAppointment();
+    }
+
+    public boolean isEmpty(){
+        if (size() == 0){
+            return true;
+        }
+        return false;
     }
 
     public int size(){
