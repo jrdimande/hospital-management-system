@@ -668,10 +668,13 @@ public class DoctorPanel extends JPanel {
 
                     if (rec.getPriorityQueue().size() != 0){
                         rec.getPriorityQueue().poll();
+                        dash.getHighPriority().remove(rec.getPriorityQueue().size());
+
                     }else {
                         rec.getPatientQueue().dequeue();
                     }
 
+                    // Update Queue view and Dashboard card
                     queuePanel.removePatient(rec.getIdByName(patientNameField.getText()));
                     dash.getNumberOfPatients().remove(rec.getPatientQueue().size() + rec.getPriorityQueue().size());
 
