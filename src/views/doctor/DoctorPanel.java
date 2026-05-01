@@ -485,32 +485,6 @@ public class DoctorPanel extends JPanel {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // Atendimento
         JPanel appointmentEvents = new JPanel(new GridLayout(1, 2));
         appointmentEvents.setPreferredSize(new Dimension(1290, 250));

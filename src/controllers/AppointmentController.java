@@ -10,6 +10,10 @@ public class AppointmentController {
         appointmentService = new AppointmentService();
     }
 
+    public void removeAppointment(int id){
+        appointmentService.removeAppointment(id);
+    }
+
     public Stack getAppointments(){
         return appointmentService.getAppointments();
     }

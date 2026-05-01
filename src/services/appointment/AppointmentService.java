@@ -14,4 +14,8 @@ public class AppointmentService {
     public Stack getAppointments(){
         return appointmentRepository.findAll();
     }
+
+    public void removeAppointment(int id){
+        appointmentRepository.delete(id);
+    }
 }

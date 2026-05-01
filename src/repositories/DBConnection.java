@@ -10,8 +10,8 @@ public class DBConnection {
         try {
         		
         	    String url = "jdbc:mysql://localhost:3306/hospital_db";
-        	    String user = "timoteo";
-        	    String password = "1234";
+        	    String user = "";
+        	    String password = "";
 
         	    Connection conn = DriverManager.getConnection(url, user, password);
         	    System.out.println("Conectado com sucesso!");

@@ -87,13 +87,6 @@ public class Card extends JPanel {
         }
 
 
-
-
-
-
-
-
-
         add(priorityPanel, gbc);
 
 

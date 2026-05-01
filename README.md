@@ -40,10 +40,6 @@ pacientes**, utilizando estruturas de dados implementadas manualmente.
 -   Registra pacientes
 -   Adiciona pacientes na fila
 
-### Enfermeiro
-
--   Realiza triagem
--   Define prioridade
 
 ### Médico
 
