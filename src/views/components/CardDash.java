@@ -138,7 +138,7 @@ public class CardDash extends JPanel {
     }
 
     public void remove(int number){
-        this.number =- number;
+        this.number--;
         this.numberLabel.setText(String.valueOf(this.number));
         revalidate();
         repaint();

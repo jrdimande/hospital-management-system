@@ -673,7 +673,7 @@ public class DoctorPanel extends JPanel {
                     }
 
                     queuePanel.removePatient(rec.getIdByName(patientNameField.getText()));
-                    dash.getNumberOfPatients().remove(rec.getPatientQueue().size());
+                    dash.getNumberOfPatients().remove(rec.getPatientQueue().size() + rec.getPriorityQueue().size());
 
                     if (rec.getPatientQueue().size() == 0){
                         dash.getNextPatient().setName("Nenhum");
