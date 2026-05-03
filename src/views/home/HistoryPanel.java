@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -24,6 +26,7 @@ public class HistoryPanel extends JPanel {
     private JButton refreshButton;
     private JButton deleteButton;
     private JButton exportButton;
+    private TableRowSorter<TableModel> sorter;
 
     public HistoryPanel() {
         appointmentController = new AppointmentController();
@@ -35,6 +38,7 @@ public class HistoryPanel extends JPanel {
     }
 
     private void initComponents() {
+
         JPanel headerPanel = new JPanel(new GridBagLayout());
         headerPanel.setBackground(Color.decode("#eef0f2"));
         headerPanel.putClientProperty(FlatClientProperties.STYLE, "arc:12");
@@ -50,7 +54,6 @@ public class HistoryPanel extends JPanel {
         titleLabel.setForeground(Color.decode("#0d1b2a"));
         headerPanel.add(titleLabel, gbcH);
 
-
         JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 10));
         toolbar.setBackground(Color.WHITE);
         toolbar.putClientProperty(FlatClientProperties.STYLE, "arc:12");
@@ -64,9 +67,23 @@ public class HistoryPanel extends JPanel {
         border.setTitleFont(new Font("Segoe UI", Font.BOLD, 12));
         toolbar.setBorder(border);
 
-        refreshButton = createButton("Atualizar",        "#0077b6");
+        refreshButton = createButton("Atualizar", "#0077b6");
         deleteButton  = createButton("Apagar Histórico", "#ea2b1f");
-        exportButton  = createButton("Exportar",         "#f56416");
+        exportButton  = createButton("Exportar", "#f56416");
+
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadAppointments();
+            }
+        });
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleDelete();
+            }
+        });
 
         searchField = new JTextField();
         searchField.setPreferredSize(new Dimension(200, 32));
@@ -85,10 +102,8 @@ public class HistoryPanel extends JPanel {
         sep.setPreferredSize(new Dimension(1, 28));
         sep.setForeground(Color.decode("#dee2e6"));
         toolbar.add(sep);
-
         toolbar.add(searchField);
         toolbar.add(filterCombo);
-
 
         model = new DefaultTableModel(
                 new Object[]{"ID", "Paciente", "Médico", "Data", "Notas"}, 0
@@ -97,7 +112,7 @@ public class HistoryPanel extends JPanel {
             public boolean isCellEditable(int row, int column) { return false; }
         };
 
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
+        sorter = new TableRowSorter<>(model);
 
         table = new JTable(model);
         table.setRowSorter(sorter);
@@ -130,12 +145,6 @@ public class HistoryPanel extends JPanel {
             }
         });
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBorder(BorderFactory.createLineBorder(Color.decode("#dee2e6"), 1));
-        scrollPane.putClientProperty(FlatClientProperties.STYLE, "arc:10");
-
-        refreshButton.addActionListener(e -> loadAppointments());
-
         searchField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
@@ -150,16 +159,45 @@ public class HistoryPanel extends JPanel {
             }
         });
 
-        // deleteButton.addActionListener(e -> { });
-        // exportButton.addActionListener(e -> { });
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.decode("#dee2e6"), 1));
+        scrollPane.putClientProperty(FlatClientProperties.STYLE, "arc:10");
 
         JPanel topWrapper = new JPanel(new BorderLayout(0, 8));
         topWrapper.setBackground(Color.decode("#f8f9fa"));
         topWrapper.add(headerPanel, BorderLayout.NORTH);
         topWrapper.add(toolbar,     BorderLayout.SOUTH);
 
-        add(topWrapper,  BorderLayout.NORTH);
-        add(scrollPane,  BorderLayout.CENTER);
+        add(topWrapper, BorderLayout.NORTH);
+        add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private void handleDelete() {
+        int selectedRow = table.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(
+                    SwingUtilities.getWindowAncestor(this),
+                    "Selecione uma linha para apagar.",
+                    "Nenhuma seleção",
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(
+                SwingUtilities.getWindowAncestor(this),
+                "Tem certeza que deseja apagar este registo?",
+                "Confirmar exclusão",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            int modelRow = table.convertRowIndexToModel(selectedRow);
+            model.removeRow(modelRow);
+        }
     }
 
     private JButton createButton(String text, String hex) {
